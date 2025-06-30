@@ -2,8 +2,12 @@
     <string name="app_name">Modsen-Tasks-Roman</string>
     <string name="task_selection_screen_header">Select Task</string>
     <string name="task_selection_screen_first_task">First Task</string>
+    <string name="task_selection_screen_second_task">Second Task</string>
     <string name="login_screen_header">Log in</string>
     <string name="login_screen_login_field_label">Login</string>
     <string name="login_screen_password_field_label">Password</string>
     <string name="login_screen_button_text">Login</string>
+    <string name="posts_no_internet_exception_text">No Internet connection</string>
+    <string name="posts_other_exception_text">Unexpected error</string>
+    <string name="posts_page_header">Posts</string>
 </resources>

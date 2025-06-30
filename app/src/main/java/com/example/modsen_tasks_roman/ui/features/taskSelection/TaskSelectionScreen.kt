@@ -20,7 +20,8 @@ import com.example.modsen_tasks_roman.ui.theme.ModsenTasksRomanTheme
 
 @Composable
 fun TaskSelectionScreen(
-    onNavigateToFirstTask: () -> Unit
+    onNavigateToFirstTask: () -> Unit,
+    onNavigateToSecondTask: () -> Unit
 ){
     Column {
         Text(
@@ -42,6 +43,18 @@ fun TaskSelectionScreen(
                 Text(stringResource(R.string.task_selection_screen_first_task))
             }
         }
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+        ) {
+            Button(
+                onClick = { onNavigateToSecondTask() }
+            ) {
+                Text(stringResource(R.string.task_selection_screen_second_task))
+            }
+        }
     }
 }
 
@@ -50,6 +63,6 @@ fun TaskSelectionScreen(
 @Composable
 fun TaskSelectionScreenPreview(){
     ModsenTasksRomanTheme {
-        TaskSelectionScreen(onNavigateToFirstTask = {})
+        TaskSelectionScreen(onNavigateToFirstTask = {}, onNavigateToSecondTask = {})
     }
 }
