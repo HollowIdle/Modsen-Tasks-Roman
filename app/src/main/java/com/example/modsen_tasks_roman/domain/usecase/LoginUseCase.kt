@@ -7,7 +7,6 @@ class LoginUseCase (
     private val authRepository: IAuthRepository
 )
 {
-    suspend operator fun invoke(credentials: UserCredentialsDomainModel): Result<Unit>{
-        return authRepository.validateCredentials(credentials)
-    }
+    suspend operator fun invoke(credentials: UserCredentialsDomainModel): Result<Unit> =
+        authRepository.validateCredentials(credentials)
 }

@@ -25,23 +25,24 @@ class LoginViewModel(
             is LoginIntent.UsernameChanged -> {
                 _uiState.update { currentState ->
                     currentState.copy(
-                        usernameInput = intent.username,
-                        isLoginButtonEnabled = intent.username.isNotBlank()
-                                && currentState.passwordInput.isNotBlank()
+                        usernameInput = intent.username
                     )
                 }
             }
             is LoginIntent.PasswordChanged -> {
                 _uiState.update { currentState ->
                     currentState.copy(
-                        passwordInput = intent.password,
-                        isLoginButtonEnabled = intent.password.isNotBlank()
-                                && currentState.usernameInput.isNotBlank()
+                        passwordInput = intent.password
                     )
                 }
             }
 
             is LoginIntent.LoginClicked -> {
+                _uiState.update { currentState ->
+                    currentState.copy(
+                        isLoading = true
+                    )
+                }
                 performLogin()
             }
 
@@ -66,12 +67,12 @@ class LoginViewModel(
 
             result.fold(
                 onSuccess = {
-                    _uiState.update { it.copy(isLoading = false) }
                     _event.emit(LoginEvent.NavigateToSimplePage)
+                    _uiState.update { it.copy(isLoading = false) }
                 },
                 onFailure = {
-                    _uiState.update { it.copy(isLoading = false) }
                     _event.emit(LoginEvent.ShowToast("Ошибка входа"))
+                    _uiState.update { it.copy(isLoading = false) }
                 }
             )
         }
