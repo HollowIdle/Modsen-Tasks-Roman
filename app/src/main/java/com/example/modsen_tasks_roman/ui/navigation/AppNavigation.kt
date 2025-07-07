@@ -7,6 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.modsen_tasks_roman.ui.features.login.LoginScreen
 import com.example.modsen_tasks_roman.ui.features.login.LoginViewModel
+import com.example.modsen_tasks_roman.ui.features.posts.PostsScreen
+import com.example.modsen_tasks_roman.ui.features.posts.PostsViewModel
 import com.example.modsen_tasks_roman.ui.features.simplePage.SimplePageScreen
 import com.example.modsen_tasks_roman.ui.features.taskSelection.TaskSelectionScreen
 import org.koin.androidx.compose.koinViewModel
@@ -25,6 +27,9 @@ fun AppNavigation(
             TaskSelectionScreen(
                 onNavigateToFirstTask = {
                     navController.navigate(ScreenRoute.Login.route)
+                },
+                onNavigateToSecondTask = {
+                    navController.navigate(ScreenRoute.PostsPage.route)
                 }
             )
         }
@@ -44,5 +49,13 @@ fun AppNavigation(
         composable(ScreenRoute.SimplePage.route){
             SimplePageScreen()
         }
+
+        composable(ScreenRoute.PostsPage.route){
+
+            val postsViewModel: PostsViewModel = koinViewModel()
+
+            PostsScreen(postsViewModel)
+        }
+
     }
 }

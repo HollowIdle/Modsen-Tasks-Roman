@@ -1,6 +1,6 @@
 package com.example.modsen_tasks_roman.domain.usecase
 
-import com.example.modsen_tasks_roman.domain.model.UserCredentialsDomainModel
+import com.example.modsen_tasks_roman.domain.model.userCredentials.UserCredentialsDomainModel
 import com.example.modsen_tasks_roman.domain.repository.IAuthRepository
 
 class LoginUseCase (

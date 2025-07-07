@@ -3,7 +3,7 @@ package com.example.modsen_tasks_roman.ui.features.login
 import SingleFlowEvent
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.modsen_tasks_roman.domain.model.UserCredentialsDomainModel
+import com.example.modsen_tasks_roman.domain.model.userCredentials.UserCredentialsDomainModel
 import com.example.modsen_tasks_roman.domain.usecase.LoginUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
