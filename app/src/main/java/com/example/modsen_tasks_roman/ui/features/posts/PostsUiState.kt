@@ -4,6 +4,8 @@ import com.example.modsen_tasks_roman.domain.model.post.PostDomainModel
 
 data class PostsUiState(
     val posts: List<PostDomainModel> = emptyList(),
+    val filteredPosts: List<PostDomainModel> = emptyList(),
     val error: Int? = null,
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val searchFieldText: String = ""
 )
