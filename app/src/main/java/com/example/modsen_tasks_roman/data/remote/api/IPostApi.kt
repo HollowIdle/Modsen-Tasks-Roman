@@ -1,17 +1,24 @@
 package com.example.modsen_tasks_roman.data.remote.api
 
 import com.example.modsen_tasks_roman.data.remote.model.PostApiModel
+import com.example.modsen_tasks_roman.data.remote.model.PostCommentApiModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 
 interface IPostApi {
     @GET("posts")
     suspend fun getPosts(): List<PostApiModel>
+
+    @GET("comments")
+    suspend fun getCommentsByPostId(
+        @Query("postId") postId: Int
+    ) : List<PostCommentApiModel>
 
     companion object {
         private const val BASE_URL = "https://jsonplaceholder.typicode.com/"

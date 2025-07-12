@@ -1,18 +1,18 @@
 package com.example.modsen_tasks_roman.data.mapper
 
 import android.util.Log
-import com.example.modsen_tasks_roman.domain.model.post.PostExceptionDomainModel
+import com.example.modsen_tasks_roman.domain.model.post.ConnectionExceptionDomainModel
 import java.net.ConnectException
 import java.net.UnknownHostException
 
-fun Throwable.toPostExceptionDomainModel(): PostExceptionDomainModel {
+fun Throwable.toConnectionExceptionDomainModel(): ConnectionExceptionDomainModel {
     Log.e("!!", this.stackTraceToString())
     return when (this){
         is UnknownHostException, is ConnectException ->
-            PostExceptionDomainModel.NoInternet(this)
+            ConnectionExceptionDomainModel.NoInternet(this)
         is retrofit2.HttpException ->
-            PostExceptionDomainModel.Other(this)
-        is PostExceptionDomainModel -> this
-        else -> PostExceptionDomainModel.Other(this)
+            ConnectionExceptionDomainModel.Other(this)
+        is ConnectionExceptionDomainModel -> this
+        else -> ConnectionExceptionDomainModel.Other(this)
     }
 }
