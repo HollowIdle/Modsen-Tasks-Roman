@@ -11,6 +11,8 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
@@ -30,15 +32,20 @@ fun PostComments(
     viewModel: PostCommentsViewModel,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val intent: (PostCommentsIntent) -> Unit by remember {
+        mutableStateOf(viewModel::processIntent)
+    }
 
     Content(
-        state = uiState
+        state = uiState,
+        intent = intent
     )
 }
 
 @Composable
 private fun Content(
-    state: PostCommentsUiState
+    state: PostCommentsUiState,
+    intent: (PostCommentsIntent) -> Unit
 ){
     Box(
         modifier = Modifier
@@ -51,7 +58,8 @@ private fun Content(
             }
             else{
                 PostSection(
-                    state.post
+                    state.post,
+                    intent
                 )
 
                 CommentsSectionHeader()
@@ -78,7 +86,8 @@ fun LoaderSection(){
 
 @Composable
 fun PostSection(
-    post: PostDomainModel
+    post: PostDomainModel,
+    intent: (PostCommentsIntent) -> Unit
 ){
     Box(
         Modifier
@@ -86,7 +95,13 @@ fun PostSection(
                 color = colorResource(R.color.purple_200)
             )
     ){
-        Post(post)
+        Post(
+            post = post,
+            isFavorite = post.isFavorite,
+            onFavoriteClick = {
+                intent(PostCommentsIntent.FavoriteToggleClicked)
+            }
+            )
     }
 }
 

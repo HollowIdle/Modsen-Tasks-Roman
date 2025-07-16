@@ -10,6 +10,7 @@
     <string name="posts_no_internet_exception_text">No Internet connection</string>
     <string name="posts_other_exception_text">Unexpected error</string>
     <string name="posts_page_header">Posts</string>
-    <string name="search_field_hint">"Enter text"</string>
-    <string name="comments_section_header">"Comments"</string>
+    <string name="search_field_hint">Enter text</string>
+    <string name="comments_section_header">Comments</string>
+    <string name="favorite_icon_content_description">Favorite</string>
 </resources>

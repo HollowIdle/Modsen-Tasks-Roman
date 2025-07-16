@@ -1,6 +1,6 @@
 package com.example.modsen_tasks_roman.data.repository
 
-import com.example.modsen_tasks_roman.data.exceptions.InvalidCredentialsException
+import com.example.modsen_tasks_roman.domain.model.error.InvalidCredentialsException
 import com.example.modsen_tasks_roman.domain.model.userCredentials.UserCredentialsDomainModel
 import com.example.modsen_tasks_roman.domain.repository.IAuthRepository
 

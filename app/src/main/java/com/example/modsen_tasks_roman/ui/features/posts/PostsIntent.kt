@@ -5,4 +5,6 @@ import com.example.modsen_tasks_roman.domain.model.post.PostDomainModel
 sealed interface PostsIntent {
     data class PostClicked(val post: PostDomainModel) : PostsIntent
     data class SearchFieldTextChanged(val newText: String) : PostsIntent
+    data class FavoriteToggleClicked(val postId: Int, val isCurrentlyFavorite: Boolean) : PostsIntent
+    data object PostsScreenEntered : PostsIntent
 }
