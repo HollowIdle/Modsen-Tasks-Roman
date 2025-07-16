@@ -1,5 +1,7 @@
 package com.example.modsen_tasks_roman.ui.features.posts
 
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,6 +27,7 @@ import com.example.modsen_tasks_roman.R
 import com.example.modsen_tasks_roman.domain.model.post.PostDomainModel
 import com.example.modsen_tasks_roman.ui.features.common.Post
 import com.example.modsen_tasks_roman.ui.features.common.SearchField
+import com.example.modsen_tasks_roman.ui.features.common.SwipeableRow
 import com.example.modsen_tasks_roman.ui.features.loader.Loader
 
 
@@ -52,7 +55,6 @@ fun PostsScreen(
                 }
             }
         }
-
     }
 }
 
@@ -107,16 +109,32 @@ private fun Content(
                 )
             }
             LazyColumn {
-                items(state.filteredPosts) { post ->
+                items(state.filteredAndSortedPosts) { post ->
                     HorizontalDivider(
                         thickness = 2.dp
                     )
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable { intent(PostsIntent.PostClicked(post)) }
+
+                    SwipeableRow(
+                        modifier = Modifier.animateItem(
+                            placementSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing)
+                        ),
+                        onSwipe = {
+                            intent(PostsIntent.FavoriteToggleClicked(post.id, post.isFavorite))
+                        }
                     ) {
-                        Post(post = post)
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable { intent(PostsIntent.PostClicked(post)) }
+                        ) {
+                            Post(
+                                post = post,
+                                isFavorite = post.isFavorite,
+                                onFavoriteClick = {
+                                    intent(PostsIntent.FavoriteToggleClicked(post.id, post.isFavorite))
+                                }
+                            )
+                        }
                     }
                 }
             }
